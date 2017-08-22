@@ -1,0 +1,30 @@
+Effect of PID component in the implementation:
+To study the effect of a PID component, i switched off the other 2 components. Following are my observations.
+
+only P component active: The car always stayed on the track (atleast at low speeds) but it was continiously hovering around the 
+                         center of the track.The controller started applying correction proportional to the error on either side of the track
+                         ,Therefore the car always oscillates around the track center.
+
+only d component active : The car always stayed on one side of the track for some time and later it went out of the track.
+                           As the car started deviating from center the controller started applying correction but this was not sufficient
+                           to reduce cte to 0, meanwhile the cte was staying constant (when the track is straight) and the controller didnt
+                           reacted.   
+
+only i component active: The controller started applying correction as soon as the car deviated from the track center but the correction 
+                          was too high on the other direction, Therfore the car drove out of the track immediately.
+
+
+Choosing final hyperparameter values:
+
+I tuned the PID controller manually. I did this in order to understand the effect of parameters on controller behaviour.
+At first i started tuning only P value. I started with value of 1.0 and reduced it until the car was able to stay  on track.
+at P=0.2 the car was able to stay on track but continiously hovering around track center due to the proportional correction
+on either side of the track.
+Then i started tuning d value. I wanted to start with values greater than 1.5 as the change in the cte values were not very high.
+at d=3, the oscillations started reducing, but the controlling action was not very smooth around the curves.
+This lead me to tuning of i value. at first, i started with an i value of 0.1 but the corrections were very high and the 
+car veered of the track immediately. i started reducing i value step by step and around 0.015 the performance of the controller
+was very smooth.
+
+
+
